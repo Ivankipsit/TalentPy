@@ -37,7 +37,7 @@ def get_student_grade(m1,m2,m3):
         return "B"
 
 def validate_marks(m1,m2,m3):
-    if ((m1 or m2 or m3) < 0) or ((type(m1) or type(m2) or type(m3)) != type(12):
+    if ((m1 or m2 or m3) < 0) or ((type(m1) or type(m2) or type(m3)) == type("123")):
         print(False)
     if ((m1 or m2 or m3) > 25):
         return False
@@ -46,9 +46,19 @@ def validate_marks(m1,m2,m3):
         
 def validate_student_name(name):
     if (5 < len(name) < 25):
-        return
-    
-
+        return True
+    else:
+        return False
+ 
+def main(m1,m2,m3,name):
+    if validate_student_name(name) == False:
+        return "Invalid Student Name"
+    if validate_marks(m1,m2,m3) == False:
+        return "Invalid Mark Input"
+    if (m1 >=7 and m2 >=7 and m2 >=7 ) == False:
+        return "You got failed, Grades cannot be calculated"
+    else:
+        return get_student_grade(m1,m2,m3)
 
 
 m1 = int(input("m1: "))
@@ -58,3 +68,6 @@ name = input("Name: ")
 
 print(get_student_marks(m1,m2,m3))
 print(get_student_grade(m1,m2,m3))
+print(validate_marks(m1,m2,m3))
+print(validate_student_name(name))
+print(main(m1,m2,m3,name))
