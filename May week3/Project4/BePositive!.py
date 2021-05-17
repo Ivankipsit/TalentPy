@@ -1,5 +1,5 @@
 """
-Be Positive! Create a function to sum up all positive argument inputs. Inputs ranges from 0 to N,
+Be Positive!  Create a function to sum up all positive argument inputs. Inputs ranges from 0 to N,
 where N can be any positive number.
 """
 
