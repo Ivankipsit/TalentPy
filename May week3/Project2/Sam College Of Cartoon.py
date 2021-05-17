@@ -37,6 +37,7 @@ parameter to function 3 and get the output from F3 and print it.
 • If call to function 2, gives False, print the message “Oops! No cartoon selected”.
 """
 
+
 import random
 def Function1(*a): 
     if list1 == [""]:

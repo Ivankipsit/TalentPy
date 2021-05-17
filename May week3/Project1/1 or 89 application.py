@@ -7,6 +7,8 @@ You have to repeat step (1) and (2) until you reach 1 or 89. Note that, always y
 1 or 89 for sure. Input must be a positive number.
 If the operation reaches at the end, 89 return True, if operation reaches 1 at the end return False.
 """
+
+
 def one_or_eight(no):
     list1 = []
     list2 = []

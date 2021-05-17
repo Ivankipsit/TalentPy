@@ -3,6 +3,7 @@ Be Positive!  Create a function to sum up all positive argument inputs. Inputs r
 where N can be any positive number.
 """
 
+
 def sumof(*a):
     a = []
     for ele in list1:

@@ -7,6 +7,8 @@ Check for following conditions :
 2. If K occurred only once in S, return “Difference can’t be calculated”.
 3. If K occurs more than once, return count of difference.
 """
+
+
 def diff(S,K):
     list1 = list(S)
     list2 = []
