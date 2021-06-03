@@ -1,6 +1,7 @@
 """
 Write a generator to get even numbers from 1 to infinity.
 """
+
 import time
 try:
     x = 0
