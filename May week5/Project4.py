@@ -33,8 +33,229 @@ you should not declare him as winner! He has to exactly to go to 100th box to be
 winner.
 """
 
+import random as rd
+
+#Player class
+class Player:
+
+    def __init__(self, player, current_position = 1):
+        self.player = player
+        self.current_position = current_position
+        print("Running Player __init__")
+    
+    def dice_roll(self,i = 0):
+        print("Running Player dice_roll")
+        i+=1
+        print("roll count",i)
+        a = rd.randint(1,6)
+        print("random roll = ",a)
+        return  a
+
+#Board class
+class Board:
+    
+    def __init__(self,position_of_snakes,position_of_ladders):
+        self.position_of_snakes = position_of_snakes
+        self.position_of_ladders = position_of_ladders
+        print("Running Board __init__")
+        
+    
+    def is_snake(self, current_position):
+        heads = list(self.position_of_snakes.keys())
+        tails = list(self.position_of_snakes.values())
+        print("Running Board is_snake")
+        print(current_position)
+        if current_position in heads:
+            return True
+        else:
+            return False
+        
+    def go_down(self, current_position):
+        heads = list(self.position_of_snakes.keys())
+        tails = list(self.position_of_snakes.values())
+        add_list = [(heads[i]-tails[i])  for i in range(len(heads))]
+        print("Running Board go_down")
+        print(current_position)
+        
+        for ele in heads:
+            if current_position == ele:
+                from_index = heads.index(ele)
+                current_position += add_list[from_index]
+        
+        return current_position
+    
+    def is_ladder(self, current_position):
+        bottom = list(self.position_of_ladders.keys())
+        top = list(self.position_of_ladders.values())
+        print("Running Board is_ladder")
+        print(current_position)
+        if current_position in bottom:
+            return True
+        else:
+            return False
+        
+    def climb_ladder(self, current_position):
+        bottom = list(self.position_of_ladders.keys())
+        top = list(self.position_of_ladders.values())
+        add_list = [(bottom[i]-top[i])  for i in range(len(bottom))]
+        print("Running Board climb_ladder")
+        print(current_position)
+        
+        for ele in bottom:
+            if current_position == ele:
+                from_index = bottom.index(ele)
+                current_position += add_list[from_index]
+        
+        return current_position
+    
+#Game Sub-Class for Board.
+class Game(Board,Player):
+    def __init__(self,class_player, class_board):
+        self.player = class_player.player
+        self.current_position = class_player.current_position
+        self.position_of_snakes = class_board.position_of_snakes
+        self.position_of_ladders = class_board.position_of_ladders
+        
+        print("Running Game __init__")
+    
+    def start_game(class_player,class_board):
+        print("Running Game Class")
+        while (class_player.current_position == 100) == False:
+            print(class_player.current_position)
+            if class_player.current_position < 100:
+                class_player.current_position += class_player.dice_roll()
+                if class_board.is_snake(class_player.current_position) == True:
+                    class_board.go_down(class_player.current_position)
+                if class_board.is_ladder(class_player.current_position) == True:
+                    class_board.climb_ladder(class_player.current_position)
+            if class_player.current_position > 100:
+                print(class_player.current_position)
+                class_player.current_position -= class_player.dice_roll()
+        else:
+            print("We have a WINNER")
+                
+                
+                
+                
+player_1 = Player("Hari")
+
+player_2 = Player("Ganesh")
+
+position_of_snakes = {5: 1, 35 : 3}
+
+position_of_ladders = {7 : 81, 41 : 53}
+
+board_1 = Board(position_of_snakes, position_of_ladders)
+print(player_1.dice_roll()) 
+Game(player_1,board_1)
+game_1 = Game.start_game(player_1, board_1)
 
 
+
+
+
+"""
+import random as rd
+
+
+#Player class
+class Player:
+
+	def __init__(self, player, current_position = 0):
+		self.player = player
+		self.current_position = current_position
+		print("Running Player __init__")
+	
+	def dice_roll(self):
+		print("Running Player dice_roll")
+		return  rd.randint(1,6)
+
+#Board class
+class Board:
+	
+	def __init__(self,position_of_snakes,position_of_ladders):
+		self.position_of_snakes = position_of_snakes
+		self.position_of_ladders = position_of_ladders
+		print("Running Board __init__")
+		
+	
+	def is_snake(self, current_position):
+		heads = list(self.position_of_snakes.keys())
+		tails = list(self.position_of_snakes.values())
+		print("Running Board is_snake")
+		if current_position in heads:
+			return True
+		else:
+			return False
+		
+	def go_down(self, current_position):
+		heads = list(self.position_of_snakes.keys())
+		tails = list(self.position_of_snakes.values())
+		add_list = [(heads[i]-tails[i])  for i in range(len(heads))]
+		print("Running Board go_down")
+		
+		for ele in heads:
+			if current_position == ele:
+				from_index = heads.index(ele)
+				current_position += add_list[from_index]
+		
+		return current_position
+	
+	def is_ladder(self, current_position):
+		bottom = list(self.position_of_ladders.keys())
+		top = list(self.position_of_ladders.values())
+		print("Running Board is_ladder")
+		if current_position in bottom:
+			return True
+		else:
+			return False
+		
+	def climb_ladder(self, current_position):
+		bottom = list(self.position_of_ladders.keys())
+		top = list(self.position_of_ladders.values())
+		add_list = [(bottom[i]-top[i])  for i in range(len(bottom))]
+		print("Running Board climb_ladder")
+		
+		for ele in bottom:
+			if current_position == ele:
+				from_index = bottom.index(ele)
+				current_position += add_list[from_index]
+		
+		return current_position
+	
+#Game Sub-Class for Board.
+class Game(Board,Player):
+	def start_game(self):
+		print("Running Game Class")
+		while (self.current_position == 100) == False:
+			if self.current_position < 100:
+				self.current_position += Player.dice_roll(self)
+				if Board.is_snake(self, self.current_position) == True:
+					Board.go_down(self, self.current_position)
+				if Board.is_ladder(self, self.current_position) == True:
+					Board.climb_ladder(self, self.current_position)
+			if self.current_position > 100:
+				self.current_position -= Player.dice_roll(self)
+		else:
+			print("We have a WINNER")
+				
+				
+				
+				
+player_1 = Player("Hari")
+
+player_2 = Player("Ganesh")
+
+position_of_snakes = {5: 1, 35 : 3}
+
+position_of_ladders = {7 : 81, 41 : 53}
+
+start = 0
+board = Board(position_of_snakes, position_of_ladders)
+print(player_1.dice_roll()) 
+"""
+
+"""
 import random as rd
 
 
@@ -113,7 +334,7 @@ class Game(Board,Player):
 		else:
 			print("We have a WINNER")
 				
-		
+	"""	
 	"""
 	reserve code
 	import random as rd
