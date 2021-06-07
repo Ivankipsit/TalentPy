@@ -63,7 +63,7 @@ class Board(Player):
             print("True")
         else:
             return False
-        
+       
     def climb_ladder(self, current_position):
         bottom = list(self.position_of_ladders.keys())
         top = list(self.position_of_ladders.values())
