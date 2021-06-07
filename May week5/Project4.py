@@ -37,7 +37,6 @@ winner.
 import random as rd
 import sys
 
-
 #Player class
 
 class Player:
